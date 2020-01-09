@@ -12,3 +12,7 @@ class BuscarrosItem(scrapy.Item):
     title = scrapy.Field()
     href = scrapy.Field()
     price = scrapy.Field()
+    image = scrapy.Field()
+    adress = scrapy.Field()
+    #marca = scrapy.Field()
+    
