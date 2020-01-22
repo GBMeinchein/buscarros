@@ -8,7 +8,7 @@ class WebmotorsSpider(scrapy.Spider):
     name = 'Webmotors'
     allowed_domains = ['webmotors.com.br']
     start_urls = ['https://www.webmotors.com.br/api/search/car?url=https://www.webmotors.com.br/carros%2Fsc%2Ffiat%3Festadocidade%3DSanta%2520Catarina&actualPage=1&displayPerPage=24&order=1&showMenu=true&showCount=true&showBreadCrumb=true&testAB=false&returnUrl=false']#['https://www.webmotors.com.br/carros/sc/fiat?estadocidade=Santa%20Catarina&tipoveiculo=carros&marca1=FIAT']
-
+    i = 1
     def start_requests(self):
         headers= {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0'}
         for url in self.start_urls:
@@ -16,8 +16,8 @@ class WebmotorsSpider(scrapy.Spider):
 
     def parse(self, response):
         jsonresponse = json.loads(response.body)
-        
-        i = 0
+        start_urls = 'https://www.webmotors.com.br/api/search/car?url=https://www.webmotors.com.br/carros%2Fsc%2Ffiat%3Festadocidade%3DSanta%2520Catarina&actualPage=1&displayPerPage=24&order=1&showMenu=true&showCount=true&showBreadCrumb=true&testAB=false&returnUrl=false'
+        i = 1
         for SearchResult in jsonresponse["SearchResults"]:
             
             new_item = BuscarrosItem()          
@@ -30,6 +30,6 @@ class WebmotorsSpider(scrapy.Spider):
 
             yield new_item
         
-        #next_page = response.css('li.item.next').css('a.link::attr(href)').extract()[0]
+        next_page = start_urls.replace("Page="+str(i), "Page="+str(i + 1))
 
-        #yield Request(url=next_page, callback=self.parse)
+        yield Request(url=next_page, callback=self.parse)
