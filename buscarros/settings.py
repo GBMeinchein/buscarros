@@ -16,10 +16,20 @@ NEWSPIDER_MODULE = 'buscarros.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'buscarros (+http://www.yourdomain.com)'
+USER_AGENT = 'buscarros (http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+
+# ITEM_PIPELINES = ['buscarros.pipelines.BuscarrosPipeline', ]
+ITEM_PIPELINES = {
+   'buscarros.pipelines.BuscarrosPipeline': 300,
+}
+
+MONGODB_SERVER = "mongodb+srv://admin:admin@cluster0-bnbkn.mongodb.net/test?retryWrites=true&w=majority"
+MONGODB_PORT = 27017
+MONGODB_DB = "buscarros"
+MONGODB_COLLECTION = "car"
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -64,9 +74,6 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'buscarros.pipelines.BuscarrosPipeline': 300,
-#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
