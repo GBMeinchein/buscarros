@@ -210,7 +210,7 @@ tornado==5.1.1
 tqdm==4.32.1
 traceback2==1.4.0
 traitlets==4.3.2
-Twisted==19.7.0
+Twisted==22.10.0
 typing==3.7.4
 unicodecsv==0.14.1
 unittest2==1.1.0
